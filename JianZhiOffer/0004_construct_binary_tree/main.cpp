@@ -41,9 +41,30 @@ public:
     }
 };
 
-void print_tree_pre(TreeNode*);
-void print_tree_in(TreeNode*);
-void print_tree_post(TreeNode*);
+void tree_pre(TreeNode* head, std::vector<int>& out)
+{
+    if (head == nullptr)
+    {
+        return;
+    }
+
+    out.push_back(head->val);
+    tree_pre(head->left, out);
+    tree_pre(head->right, out);
+}
+
+void tree_in(TreeNode* head, std::vector<int>& out)
+{
+    if (head == nullptr)
+    {
+        return;
+    }
+
+    tree_in(head->left, out);
+    out.push_back(head->val);
+    tree_in(head->right, out);
+};
+
 int main(int argc, char* argv[])
 {
     std::vector<int> pre = { 1,2,4,7,3,5,6,8 };
@@ -52,49 +73,12 @@ int main(int argc, char* argv[])
     Solution solution;
     TreeNode* head = solution.reConstructBinaryTree(pre, vin);
 
-    print_tree_pre(head);
-    std::cout << std::endl;
+    std::vector<int> pre_;
+    tree_pre(head, pre_);
 
-    print_tree_in(head);
-    std::cout << std::endl;
+    std::vector<int> vin_;
+    tree_in(head, vin_);
 
-    print_tree_post(head);
-    std::cout << std::endl;
+    assert(pre_ == pre && vin_ == vin);
     return 0;
 }
-
-void print_tree_pre(TreeNode* head)
-{
-    if (head == nullptr)
-    {
-        return;
-    }
-
-    std::cout << head->val;
-    print_tree_pre(head->left);
-    print_tree_pre(head->right);
-};
-
-void print_tree_in(TreeNode* head)
-{
-    if (head == nullptr)
-    {
-        return;
-    }
-
-    print_tree_in(head->left);
-    std::cout << head->val;
-    print_tree_in(head->right);
-};
-
-void print_tree_post(TreeNode* head)
-{
-    if (head == nullptr)
-    {
-        return;
-    }
-
-    print_tree_post(head->left);
-    print_tree_post(head->right);
-    std::cout << head->val;
-};

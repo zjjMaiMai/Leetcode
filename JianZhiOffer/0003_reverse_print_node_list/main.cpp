@@ -42,20 +42,25 @@ public:
 
 int main(int argc, char* argv[])
 {
-    ListNode* head = new ListNode(0);
-    ListNode* it = head;
-    for (int i = 0; i < 5; i++)
+    std::vector<int> src = { 1, 2, 3, 4, 5 };
+
+    ListNode* head = new ListNode(1);
+    ListNode* node = head;
+
+    for (auto it = src.begin() + 1; it != src.end(); it++)
     {
-        it->next = new ListNode(i);
-        it = it->next;
+        if (!node->next)
+        {
+            node->next = new ListNode(-1);
+        }
+        node = node->next;
+        node->val = *it;
     }
 
     Solution solution;
     auto ret = solution.printListFromTailToHead(head);
-
-    for (const auto& var : ret)
-    {
-        std::cout << var;
-    }
+    
+    std::reverse(src.begin(), src.end());
+    assert(src == ret);
     return 0;
 }

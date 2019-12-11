@@ -50,10 +50,9 @@ int main(int argc, char* argv[])
     Solution solution;
     solution.replaceSpace(src.data(), sizeof("We Are Happy."));
 
-    auto it = src.begin();
-    while (it != src.end() && *it != 0)
-    {
-        std::cout << *it++;
-    }
+    std::vector<char> dst(128, 0);
+    std::strcpy(dst.data(), "We%20Are%20Happy.");
+
+    assert(src == dst);
     return 0;
 }
