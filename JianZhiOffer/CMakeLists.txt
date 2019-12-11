@@ -1,0 +1,8 @@
+SUBDIRLIST(SUBDIRS ${CMAKE_CURRENT_SOURCE_DIR})
+FOREACH(subdir ${SUBDIRS})
+  get_filename_component(project_name ${subdir} NAME)
+  string(REPLACE " " "_" project_name ${project_name})
+  add_executable(${project_name} ${subdir}/main.cpp)
+  target_compile_features(${project_name} PRIVATE cxx_std_14)
+  set_target_properties(${project_name} PROPERTIES FOLDER "JianZhiOffer")
+ENDFOREACH()
