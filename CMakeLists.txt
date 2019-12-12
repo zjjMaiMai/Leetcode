@@ -20,3 +20,4 @@ macro(SUBDIRLIST result curdir)
 ENDMACRO()
 
 add_subdirectory(JianZhiOffer)
+add_subdirectory(LeetCode)
