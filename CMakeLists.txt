@@ -21,3 +21,4 @@ ENDMACRO()
 
 add_subdirectory(JianZhiOffer)
 add_subdirectory(LeetCode)
+add_subdirectory(Other)
