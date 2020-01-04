@@ -38,11 +38,19 @@ public:
         {
             int pop = x % 10;
             x /= 10;
-            if (rev > INT_MAX / 10 || (rev == INT_MAX / 10 && pop > 7))
+
+            if (pop > 0 && ((std::numeric_limits<int>::max() - pop) / 10) < rev)
+            {
                 return 0;
-            if (rev < INT_MIN / 10 || (rev == INT_MIN / 10 && pop < -8))
+            }
+            else if (pop < 0 && ((std::numeric_limits<int>::min() - pop) / 10) > rev)
+            {
                 return 0;
-            rev = rev * 10 + pop;
+            }
+            else
+            {
+                rev = rev * 10 + pop;
+            }
         }
         return rev;
     }
